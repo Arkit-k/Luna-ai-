@@ -119,12 +119,13 @@ export default function HomeScreen() {
       });
       formData.append("model", "whisper-1");
 
+
       const response = await axios.post(
-        "https://api.openai.com/v1/audio/transcriptions",
+        "https://api.assemblyai.com/v2/transcript",
         formData,
         {
           headers: {
-            Authorization: `Bearer ${process.env.EXPO_PUBLIC_OPENAI_API_KEY}`,
+            Authorization: `Bearer ${process.env.EXPO_PUBLIC_ASSEMBLY_API_KEY}`,
             "Content-Type": "multipart/form-data",
           },
         }
@@ -139,7 +140,7 @@ export default function HomeScreen() {
   const sendToGpt = async (text: string) => {
     try {
       const response = await axios.post(
-        "https://api.openai.com/v1/chat/completions",
+        "https://api-inference.huggingface.co/models/gpt2",
         {
           model: "gpt-4",
           messages: [
@@ -156,7 +157,7 @@ export default function HomeScreen() {
         },
         {
           headers: {
-            Authorization: `Bearer ${process.env.EXPO_PUBLIC_OPENAI_API_KEY}`,
+            Authorization: `Bearer ${process.env.EXPO_PUBLIC_HUGGING_FACE_API_KEY}`,
             "Content-Type": "application/json",
           },
         }
